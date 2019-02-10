@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Conversations;
+
+use App\Highscore;
+use BotMan\BotMan\Messages\Conversations\Conversation;
+
+class HighscoreConversation extends Conversation
+{
+    /**
+     * Start the conversation.
+     *
+     * @return mixed
+     */
+    public function run()
+    {
+        $this->showHighscore();
+    }
+
+    private function showHighscore()
+    {
+        $topUsers = Highscore::topUsers();
+
+        if (! $topUsers->count()) {
+            return $this->say('La puntuacion mas alta sigue vacia. Se el primero! 👍');
+        }
+
+        $topUsers->transform(function ($user) {
+            return "{$user->rank} - {$user->name} : *{$user->points} puntos* - {$user->telephone}";
+        });
+
+        $this->say('Aqui esta la puntuacion mas alta 🥇🥈🥉 . 20 personas en la lista recibiran 10 soles 💵💵💵. Crees que puedes hacerlo mejor? 👩‍💻👨‍💻 Iniciar otra vez: /start.');
+        $this->say('🏆 *LOS MEJORES* 🏆', ['parse_mode' => 'Markdown']);
+        $this->say($topUsers->implode("\n"), ['parse_mode' => 'Markdown']);
+    }
+}
