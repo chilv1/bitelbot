@@ -34,7 +34,7 @@ class Highscore extends Model
         return static::query()->where('points', '>', $this->points)->pluck('points')->unique()->count() + 1;
     }
 */
-    public static function topUsers($size = 20)
+    public static function topUsers($size = 40)
     {
         return static::query()->orderByDesc('points')->orderBy('correct_answers')->oldest('updated_at')->take($size)->get();
     }

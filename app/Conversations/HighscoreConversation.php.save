@@ -29,7 +29,7 @@ class HighscoreConversation extends Conversation
             return "{$user->rank} - {$user->name} : *{$user->points} puntos* - {$user->telephone}";
         });
 
-        $this->say('Aqui esta la puntuacion mas alta 🥇🥈🥉 . 40 personas en la lista recibiran 5 soles 💵💵💵. Crees que puedes hacerlo mejor? 👩‍💻👨‍💻 Iniciar otra vez: /start.');
+        $this->say('Aqui esta la puntuacion mas alta 🥇🥈🥉 .40 personas en la lista recibiran 5 soles 💵💵💵. Crees que puedes hacerlo mejor? 👩‍💻👨‍💻 Iniciar otra vez: /start.');
         $this->say('🏆 *LOS MEJORES* 🏆', ['parse_mode' => 'Markdown']);
         $this->say($topUsers->implode("\n"), ['parse_mode' => 'Markdown']);
     }

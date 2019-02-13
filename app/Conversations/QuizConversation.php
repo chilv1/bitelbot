@@ -35,7 +35,7 @@ class QuizConversation extends Conversation
      */
     public function run()
     {
-        $this->quizQuestions = Question::inRandomOrder()->take(1)->get();
+        $this->quizQuestions = Question::inRandomOrder()->take(30)->get();
         $this->questionCount = $this->quizQuestions->count();
         $this->quizQuestions = $this->quizQuestions->keyBy('id');
         $this->showInfo();
@@ -43,7 +43,7 @@ class QuizConversation extends Conversation
 
     private function showInfo()
     {
-        $this->say("Tienes *{$this->questionCount} preguntas*. Cada respuesta correcta tendrias un cierto punto. Si estas en la lista de los mejores *recibiras 10 soles*. Suerte 🍀", ['parse_mode' => 'Markdown']);
+        $this->say("Tienes *{$this->questionCount} preguntas*. Cada respuesta correcta tendrias un cierto punto. Si estas en la lista de los mejores *recibiras 5 soles*. Suerte 🍀", ['parse_mode' => 'Markdown']);
         $this->say('Despues de elegir una respuesta, espere la siguiente pregunta antes de volver a hacer clic.');
         $this->checkForNextQuestion();
     }
